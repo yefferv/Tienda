@@ -59,7 +59,7 @@ const Home = () => {
             :
             
             <Grid container spacing={2}>
-            {state.data.map((item : any)=>
+            {state.data.length > 0 && state.data.map((item : any)=>
                 <Grid item key={item.id} xs={12} sm={6} md={4} lg={3} xl={4}>
                   <CrCard item = {item} handleAddCard = {handleAddCard}/>
                 </Grid>
