@@ -69,7 +69,7 @@ const DetalleCarrito = () =>
                 <Button>TOTAL = {totalPrecio}</Button>
                 <Button variant="contained" onClick={handleClickOpen}>Pagar</Button>
                 <Button variant="contained" onClick={handleRetornarHome}>Retornar</Button>
-                <CrModal open={open} handleClose={handleRemoverProducts} handleCancelar={handleCancelar} title={"Desea continuar con el proceso de pago?"} description={"Valor a pagar: $" + totalPrecio} image={"src/assets/pse.jpg"} nombreButton= {"Realizar Pago"} nombreButtonCancelar= {"Cancelar"} puedeCancelar={true}></CrModal>
+                <CrModal open={open} handleClose={handleRemoverProducts} handleCancelar={handleCancelar} title={"Desea continuar con el proceso de pago?"} description={"Valor a pagar: $" + totalPrecio} image={"/assets/pse.jpg"} nombreButton= {"Realizar Pago"} nombreButtonCancelar= {"Cancelar"} puedeCancelar={true}></CrModal>
                 <ToastContainer />
             </Box>
             <Container maxWidth="lg">
