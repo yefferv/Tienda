@@ -20,6 +20,7 @@ const ProductList: React.FC<ProductListProps> = ({ onEdit }) => {
             <TableCell>Precio</TableCell>
             <TableCell>Descripción</TableCell>
             <TableCell>Categoria</TableCell>
+            <TableCell>URL Imagen</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -30,6 +31,7 @@ const ProductList: React.FC<ProductListProps> = ({ onEdit }) => {
               <TableCell>{product.price}</TableCell>
               <TableCell>{product.description}</TableCell>
               <TableCell>{product.category}</TableCell>
+              <TableCell>{product.image}</TableCell>
               <TableCell>
                 <Button onClick={() => onEdit(product)} variant="contained" color="primary">
                   Editar
