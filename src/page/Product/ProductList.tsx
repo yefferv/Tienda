@@ -10,6 +10,14 @@ interface ProductListProps {
 const ProductList: React.FC<ProductListProps> = ({ onEdit }) => {
   const { products, deleteProduct } = useProductContext();
 
+
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat('es-CO', {
+      style: 'currency',
+      currency: 'COP',
+    }).format(price);
+  };
+
   return (
     <TableContainer component={Paper}>
       <Table>
@@ -28,12 +36,12 @@ const ProductList: React.FC<ProductListProps> = ({ onEdit }) => {
             <TableRow key={product.id}>
               <TableCell>{product.id}</TableCell>
               <TableCell>{product.title}</TableCell>
-              <TableCell>{product.price}</TableCell>
+              <TableCell>{formatPrice(product.price)}</TableCell>
               <TableCell>{product.description}</TableCell>
               <TableCell>{product.category}</TableCell>
               <TableCell>{product.image}</TableCell>
               <TableCell>
-                <Button onClick={() => onEdit(product)} variant="contained" color="primary">
+                <Button onClick={() => onEdit(product)} variant="contained" color="primary" sx={{ marginRight: 1 }}>
                   Editar
                 </Button>
                 <Button onClick={() => deleteProduct(product.id)} variant="contained" color="secondary">
