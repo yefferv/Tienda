@@ -32,6 +32,7 @@ const AddProduct: React.FC = () => {
         ...values,
         id: Math.floor(Math.random() * 10000),
         rating: { rate: 0, count: 0 },
+        quantity:0
       };
 
       addProduct(newProduct);

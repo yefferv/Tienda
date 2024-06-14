@@ -23,7 +23,6 @@ const ProductList: React.FC<ProductListProps> = ({ onEdit }) => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>ID</TableCell>
             <TableCell>Titulo</TableCell>
             <TableCell>Precio</TableCell>
             <TableCell>Descripción</TableCell>
@@ -34,7 +33,6 @@ const ProductList: React.FC<ProductListProps> = ({ onEdit }) => {
         <TableBody>
           {products.map((product) => (
             <TableRow key={product.id}>
-              <TableCell>{product.id}</TableCell>
               <TableCell>{product.title}</TableCell>
               <TableCell>{formatPrice(product.price)}</TableCell>
               <TableCell>{product.description}</TableCell>
