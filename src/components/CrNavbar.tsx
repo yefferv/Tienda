@@ -9,19 +9,15 @@ import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useHistory } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../Auth/AuthContext';
 import { PaymentContext } from '../store/payment/PaymentContext';
-import Logo  from "../assets/CarritoCompras.png";
-
+import Logo from '../assets/CarritoCompras.png';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -53,7 +49,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
@@ -64,17 +59,19 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 interface Props {
-  handlePayment : () => void
+  handlePayment: () => void;
+  setSearchText: (text: string) => void; // Nuevo prop para establecer el texto de búsqueda
 }
 
-export default function CrNavbar({handlePayment}: Props) {
+export default function CrNavbar({ handlePayment, setSearchText }: Props) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
-  const { logout } = useContext(AuthContext)
-  const {products} = useContext(PaymentContext)
-  
-  const history = useHistory()
+  const { logout } = useContext(AuthContext);
+  const { products } = useContext(PaymentContext);
+  const [searchInput, setSearchInput] = useState('');
+
+  const history = useHistory();
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -88,18 +85,19 @@ export default function CrNavbar({handlePayment}: Props) {
   };
 
   const handleMenuAccount = () => {
-    history.push('/admin')
+    history.push('/admin');
+    handleMenuClose();
   };
 
   const handleReturnHome = () => {
-    history.push('/')
+    history.push('/');
+    handleMenuClose();
   };
 
-
   const handleCloseSesion = () => {
-    logout()
-    handleMenuClose()
-    handleReturnHome()
+    logout();
+    handleMenuClose();
+    handleReturnHome();
   };
 
   const handleMenuClose = () => {
@@ -109,6 +107,11 @@ export default function CrNavbar({handlePayment}: Props) {
 
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMobileMoreAnchorEl(event.currentTarget);
+  };
+
+  const handleSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(event.target.value);
+    setSearchText(event.target.value); // Actualiza el texto de búsqueda en el componente padre
   };
 
   const menuId = 'primary-search-account-menu';
@@ -150,18 +153,17 @@ export default function CrNavbar({handlePayment}: Props) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           size="large"
           aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
+          aria-controls={menuId}
           aria-haspopup="true"
           color="inherit"
         >
           <AccountCircle />
         </IconButton>
-        <p>Cerrar sesión</p>
+        <p>Perfil</p>
       </MenuItem>
     </Menu>
   );
@@ -170,19 +172,25 @@ export default function CrNavbar({handlePayment}: Props) {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-        <IconButton
+          <IconButton
             size="large"
             edge="start"
             color="inherit"
             aria-label="open drawer"
-            sx={{ 
+            sx={{
               mr: 2,
-              padding: '10x', // Ajusta el padding para hacer el botón más grande
-              borderRadius: '50%' 
+              padding: '10px',
+              borderRadius: '50%',
             }}
             onClick={handleReturnHome}
           >
-            <img src={Logo} alt="logo" width="55" height="45" style={{ borderRadius: '50%' }} />
+            <img
+              src={Logo}
+              alt="logo"
+              width="55"
+              height="45"
+              style={{ borderRadius: '50%' }}
+            />
           </IconButton>
           <Typography
             variant="h6"
@@ -199,13 +207,15 @@ export default function CrNavbar({handlePayment}: Props) {
             <StyledInputBase
               placeholder="Buscar…"
               inputProps={{ 'aria-label': 'search' }}
+              value={searchInput}
+              onChange={handleSearchInputChange}
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton
               size="large"
-              aria-label="show 17 new notifications"
+              aria-label="show items in cart"
               color="inherit"
               onClick={handlePayment}
             >

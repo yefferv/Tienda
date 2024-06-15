@@ -1,19 +1,19 @@
-import React from 'react'
-import CrNavbar from '../components/CrNavbar'
-
+import React from 'react';
+import CrNavbar from '../components/CrNavbar';
 
 interface Props {
-    children : React.ReactNode
-    handlePayment : () => void
+  children: React.ReactNode;
+  handlePayment: () => void;
+  onSearch: (searchText: string) => void;
 }
 
-const HomeLayaout = ({children, handlePayment}:Props) => {
+const HomeLayaout: React.FC<Props> = ({ children, handlePayment, onSearch }) => {
   return (
     <>
-      <CrNavbar handlePayment = {handlePayment}/>
+      <CrNavbar handlePayment={handlePayment} setSearchText={onSearch} />
       {children}
     </>
-  )
-}
+  );
+};
 
-export default HomeLayaout
+export default HomeLayaout;
