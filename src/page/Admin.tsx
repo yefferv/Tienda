@@ -7,9 +7,12 @@ import AddProduct from './Product/AddProduct'
 import ProductList from './Product/ProductList'
 import { Product } from '../types/Product'
 import EditProduct from './Product/EditProduct'
+import { useHistory } from 'react-router-dom'
+import { PaymentContext } from '../store/payment/PaymentContext'
 
 const Admin = () => {
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+  const {products} = useContext(PaymentContext)
 
   const handleEditProduct = (product: Product) => {
     setEditingProduct(product);
@@ -18,12 +21,17 @@ const Admin = () => {
   const handleCancelEdit = () => {
     setEditingProduct(null);
   };
+  const history = useHistory()
 
-  
+  const handlePayment = () => {
+    history.push({ pathname: '/carrito', state: { products } });
+  };
+
+
   return (
     <ProductProvider>
       <div>
-      <HomeLayaout handlePayment = {()=>{ }}>
+      <HomeLayaout handlePayment = {handlePayment} onSearch={()=>{}}>
       <Container sx={{ marginTop: 4 }}>
         <Typography variant="h4" gutterBottom>
           Administración Productos

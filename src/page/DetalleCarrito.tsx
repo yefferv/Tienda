@@ -33,6 +33,8 @@ const DetalleCarrito = () =>
         history.push('/home')
       };
 
+    
+
     const handleRemoverProducts = () => {
       toast.success("El pago se realizó correctamente", {
         position: "bottom-center",
@@ -44,7 +46,7 @@ const DetalleCarrito = () =>
       });
     };
 
-
+  
     const handleClickOpen = () => {
       setOpen(true);
     };
@@ -64,7 +66,7 @@ const DetalleCarrito = () =>
     }, [products, history]);
             
     return (
-        <HomeLayaout handlePayment = {()=>{ }}>
+        <HomeLayaout handlePayment = {()=>{}} onSearch={()=>{}}>
             <Box mt={5} display={'flex'} gap={2} justifyContent={'center'} >
                 <Button>TOTAL = {totalPrecio}</Button>
                 <Button variant="contained" onClick={handleClickOpen}>Pagar</Button>
