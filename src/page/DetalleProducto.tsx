@@ -21,7 +21,7 @@ const DetalleProducto = () =>
   }, [slug]);
   
   return (
-    <HomeLayaout handlePayment = {()=>{ }}>
+    <HomeLayaout handlePayment = {()=>{ }} onSearch={()=>{}}>
       <div style={{
         display : 'flex',
         flexDirection :'column',

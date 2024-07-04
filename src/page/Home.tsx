@@ -9,6 +9,7 @@ import { AuthContext } from '../Auth/AuthContext';
 import { PaymentContext } from '../store/payment/PaymentContext';
 import useApi from './hook/useApi';
 
+
 const Home = () => {
   const { products, setProduct, removeProduct } = useContext(PaymentContext);
   const { state } = useApi();
@@ -16,6 +17,7 @@ const Home = () => {
 
   const handleAddCard = (product: Product) => {
     const existingIndex = products.findIndex(item => item.id === product.id);
+    
     if (existingIndex !== -1) {
       removeProduct(product.id);
     } else {
@@ -35,6 +37,7 @@ const Home = () => {
   const filteredProducts = state.data.filter((product: Product) =>
     product.title.toLowerCase().includes(searchText.toLowerCase())
   );
+
 
   return (
     <HomeLayaout handlePayment={handlePayment} onSearch={handleSearch}>

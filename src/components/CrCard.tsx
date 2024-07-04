@@ -55,7 +55,6 @@ export default function CrCard({ item , handleAddCard, isVisible = true}: Props)
     }
 
     const removeProduct1 = ()=>{
-        console.log('click ', item.id)
         removeProduct(item.id)
 
     }
@@ -95,7 +94,7 @@ export default function CrCard({ item , handleAddCard, isVisible = true}: Props)
             />
         <CardContent>
             <Typography gutterBottom variant="h5" component="div" style={{}}>
-                {formatDescription(item.title,23)}
+                {formatDescription(item.title,22)}
             </Typography>
         <Typography variant="body2" color="text.secondary">
             {item.price}

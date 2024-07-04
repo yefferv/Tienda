@@ -5,7 +5,7 @@ interface ProductContextProps {
   products: Product[];
   addProduct: (product: Product) => void;
   updateProduct: (product: Product) => void;
-  deleteProduct: (id: number) => void;
+  deleteProduct: (id: string) => void;
 }
 
 const ProductContext = createContext<ProductContextProps | undefined>(undefined);
@@ -21,7 +21,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
     setProducts(products.map(product => product.id === updatedProduct.id ? updatedProduct : product));
   };
 
-  const deleteProduct = (id: number) => {
+  const deleteProduct = (id: string) => {
     setProducts(products.filter(product => product.id !== id));
   };
 

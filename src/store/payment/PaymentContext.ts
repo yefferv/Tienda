@@ -8,8 +8,8 @@ export interface IUser {
 
 export interface PaymentContextProps {
     setProduct: (item: Product)=> void
-    removeProduct: (productId: number)=> void
-    updateProductQuantity: (id: number, quantity: number)=>void
+    removeProduct: (productId: string)=> void
+    updateProductQuantity: (id: string, quantity: number)=>void
     clearProducts: ()=> void
     products : Product[]
   
