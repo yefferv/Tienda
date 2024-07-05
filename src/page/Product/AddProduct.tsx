@@ -109,8 +109,8 @@ const AddProduct: React.FC = () => {
       <Button variant="contained" color="primary" type="submit">
         Adicionar
       </Button>
-    </Box>
     <ToastContainer />
+    </Box>
     </>
   );
 };

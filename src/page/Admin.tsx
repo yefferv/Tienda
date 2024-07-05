@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { AuthContext } from '../Auth/AuthContext'
 import HomeLayaout from './HomeLayaout'
 import { ProductProvider } from '../store/product/ProductContext'
-import { Container, Typography } from '@mui/material'
+import { Container, Typography, Box } from '@mui/material'
 import AddProduct from './Product/AddProduct'
 import ProductList from './Product/ProductList'
 import { Product } from '../types/Product'
@@ -12,7 +12,7 @@ import { PaymentContext } from '../store/payment/PaymentContext'
 
 const Admin = () => {
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
-  const {products} = useContext(PaymentContext)
+  const { products } = useContext(PaymentContext)
 
   const handleEditProduct = (product: Product) => {
     setEditingProduct(product);
@@ -27,22 +27,23 @@ const Admin = () => {
     history.push({ pathname: '/carrito', state: { products } });
   };
 
-
   return (
     <ProductProvider>
       <div>
-      <HomeLayaout handlePayment = {handlePayment} onSearch={()=>{}}>
-      <Container sx={{ marginTop: 4 }}>
-        <Typography variant="h4" gutterBottom>
-          Administración Productos
-        </Typography>
-        <AddProduct />
-        <ProductList onEdit={handleEditProduct} />
-        {editingProduct && (
-          <EditProduct product={editingProduct} onCancel={handleCancelEdit} />
-        )}
-      </Container>
-      </HomeLayaout>
+        <HomeLayaout handlePayment={handlePayment} onSearch={() => { }}>
+          <Box sx={{ marginTop: 4, overflowX: 'auto' }}>
+            <Container sx={{ minWidth: '100%', padding: 0 }}>
+              <Typography variant="h4" gutterBottom>
+                Administración Productos
+              </Typography>
+              <AddProduct />
+              <ProductList onEdit={handleEditProduct} />
+              {editingProduct && (
+                <EditProduct product={editingProduct} onCancel={handleCancelEdit} />
+              )}
+            </Container>
+          </Box>
+        </HomeLayaout>
       </div>
     </ProductProvider>
   )

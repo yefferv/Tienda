@@ -19,7 +19,7 @@ const ProductList: React.FC<ProductListProps> = ({ onEdit }) => {
   };
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} sx={{ minWidth: 1200 }}>
       <Table>
         <TableHead>
           <TableRow>
