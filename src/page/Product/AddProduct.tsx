@@ -4,6 +4,9 @@ import { Product } from '../../types/Product';
 import { TextField, Button, Box, InputAdornment } from '@mui/material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { v4 as uuidv4 } from 'uuid';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const initialProductState = {
   title: '',
@@ -30,17 +33,27 @@ const AddProduct: React.FC = () => {
     onSubmit: (values) => {
       const newProduct: Product = {
         ...values,
-        id: Math.floor(Math.random() * 10000),
+        id: uuidv4(),
         rating: { rate: 0, count: 0 },
         quantity:0
       };
 
       addProduct(newProduct);
-      formik.resetForm();
+
+      toast.success("Producto agregado correctamente", {
+        position: "bottom-center",
+        autoClose: 1000,
+        onClose: () => {
+          formik.resetForm();
+        }
+      });
+
+      
     },
   });
 
   return (
+    <>
     <Box component="form" noValidate autoComplete="off" onSubmit={formik.handleSubmit} sx={{ display: 'flex', gap: 2, mt: 2 }}>
       <TextField
         label="Título"
@@ -97,6 +110,8 @@ const AddProduct: React.FC = () => {
         Adicionar
       </Button>
     </Box>
+    <ToastContainer />
+    </>
   );
 };
 

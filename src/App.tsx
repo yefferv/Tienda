@@ -6,6 +6,8 @@ import {
 import Rutas from "./routers/Rutas";
 import AuthProvider from "./Auth/AuthProvider";
 import PaymentProvider from "./store/payment/PaymentProvider";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
     
@@ -16,7 +18,7 @@ const App = () => {
         <AuthProvider>
         <PaymentProvider> 
           <Rutas/>
-          </PaymentProvider>
+        </PaymentProvider>
         </AuthProvider>
       </Router>
     </ThemeProvider>

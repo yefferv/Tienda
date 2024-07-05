@@ -1,5 +1,6 @@
-import React, { createContext, useState, ReactNode } from 'react';
-import { Product } from '../../types/Product';
+import React, { createContext, useState, ReactNode, useEffect } from 'react';
+import { Product } from '../../types/Product'; 
+import useApi from '../../page/hook/useApi';
 
 interface ProductContextProps {
   products: Product[];
@@ -12,21 +13,39 @@ const ProductContext = createContext<ProductContextProps | undefined>(undefined)
 
 export const ProductProvider = ({ children }: { children: ReactNode }) => {
   const [products, setProducts] = useState<Product[]>([]);
+  const { createProduct, updateProduct, deleteProduct, fetchProducts, state } = useApi();
 
-  const addProduct = (product: Product) => {
+  useEffect(() => {
+    const loadProducts = async () => {
+      await fetchProducts();
+      setProducts(state.data);
+    };
+
+    loadProducts();
+  }, []);
+
+  useEffect(() => {
+    setProducts(state.data);
+  }, [state.data]);
+
+  const addProduct = async (product: Product) => {
     setProducts([...products, product]);
+    await createProduct(product);
+    await fetchProducts();
   };
 
-  const updateProduct = (updatedProduct: Product) => {
-    setProducts(products.map(product => product.id === updatedProduct.id ? updatedProduct : product));
+  const modifyProduct = async (updatedProduct: Product) => {
+    await updateProduct(updatedProduct);
+    await fetchProducts();
   };
 
-  const deleteProduct = (id: string) => {
-    setProducts(products.filter(product => product.id !== id));
+  const removeProduct = async (id: string) => {
+    await deleteProduct(id);
+    
   };
 
   return (
-    <ProductContext.Provider value={{ products, addProduct, updateProduct, deleteProduct }}>
+    <ProductContext.Provider value={{ products, addProduct, updateProduct: modifyProduct, deleteProduct: removeProduct }}>
       {children}
     </ProductContext.Provider>
   );

@@ -4,7 +4,7 @@ import { Product } from '../../types/Product';
 import { TextField, Button, Box, Modal, InputAdornment } from '@mui/material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 interface EditProductProps {
@@ -39,19 +39,21 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onCancel }) => {
       };
       
       updateProduct(updatedProduct);
-      onCancel();
       
-      /*toast.success("Producto actualizado correctamente", {
+      
+      toast.success("Producto actualizado correctamente", {
         position: "bottom-center",
         autoClose: 1000,
         onClose: () => {
+          onCancel();
         }
-      });*/
+      });
     },
-    enableReinitialize: true, // To reset the form when product changes
+    enableReinitialize: true, 
   });
 
   return (
+    <>
     <Modal
       open={true}
       onClose={onCancel}
@@ -139,6 +141,8 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onCancel }) => {
         </Box>
       </Box>
     </Modal>
+    <ToastContainer />
+    </>
   );
 };
 

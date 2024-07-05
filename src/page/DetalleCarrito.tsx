@@ -3,12 +3,9 @@ import HomeLayaout from './HomeLayaout'
 import { Box, Button, Container, Grid } from '@mui/material'
 import { useHistory, useLocation } from 'react-router-dom'
 import { Product } from '../types/Product';
-import useApi from './hook/useApi';
-import CenteredCircularProgress from '../components/CenteredCircularProgress';
 import CrCard from '../components/CrCard';
 import { PaymentContext } from '../store/payment/PaymentContext';
 import CrModal from '../components/CrModal';
-import imgbancolombia  from "../assets/Bancolombia.png";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -16,7 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 interface LocationState {
-    addCardPayment?: Product[]; // Definir el tipo de addCardPayment como un arreglo de Product
+    addCardPayment?: Product[]; 
   }
 
 
