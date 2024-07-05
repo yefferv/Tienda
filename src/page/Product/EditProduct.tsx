@@ -38,16 +38,16 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onCancel }) => {
         ...values,
       };
       
-      updateProduct(updatedProduct);
+        updateProduct(updatedProduct);
+
+        toast.success("Producto actualizado correctamente", {
+          position: "bottom-center",
+          autoClose: 1000,
+          onClose: () => {
+            onCancel();
+          }
+        });
       
-      
-      toast.success("Producto actualizado correctamente", {
-        position: "bottom-center",
-        autoClose: 1000,
-        onClose: () => {
-          onCancel();
-        }
-      });
     },
     enableReinitialize: true, 
   });

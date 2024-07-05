@@ -61,7 +61,7 @@ export default function CrCard({ item , handleAddCard, isVisible = true}: Props)
 
     function formatDescription(description: string, maxLength: number): string {
         if (description.length > maxLength) {
-          return description.substring(0, maxLength) + "...";
+          return description.substring(0, maxLength-3) + "...";
         } else {
           return description.padEnd(maxLength, ' ');
         }
